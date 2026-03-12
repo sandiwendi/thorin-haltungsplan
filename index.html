@@ -3,609 +3,636 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pferd Haltungsform</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Haltungsplan – Thorin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f5efe6;
-    --warm-brown: #8b5e3c;
-    --deep-brown: #4a2c17;
-    --gold: #c9973a;
-    --light-gold: #e8c87a;
-    --sage: #7a8c6e;
-    --dark-sage: #4a5c3e;
-    --soft-beige: #ede0cd;
-    --text-dark: #2d1f0f;
+    --cream: #F2FAFA;
+    --brown-deep: #1B3A3A;
+    --brown-mid: #2E7070;
+    --brown-light: #5AABAB;
+    --gold: #17BFBF;
+    --green-dark: #0E9999;
+    --green-mid: #33C4C4;
+    --green-light: #9EDDDD;
+    --rust: #0A8080;
+    --sand: #CBF0F0;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: var(--cream);
-    font-family: 'Crimson Pro', serif;
-    color: var(--text-dark);
+    background: var(--cream);
+    font-family: 'Lato', sans-serif;
+    color: var(--brown-deep);
     min-height: 100vh;
-    background-image: 
-      radial-gradient(ellipse at 20% 10%, rgba(201,151,58,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(122,140,110,0.1) 0%, transparent 50%);
   }
 
-  header {
-    text-align: center;
-    padding: 50px 20px 30px;
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0E9999 0%, #33C4C4 60%, #6DDADA 100%);
+    padding: 0;
     position: relative;
+    overflow: hidden;
   }
 
-  header::before {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: var(--gold);
-    margin: 0 auto 20px;
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 36px 48px 32px;
+    gap: 24px;
   }
 
-  header::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: var(--gold);
-    margin: 20px auto 0;
+  .header-left {
+    text-align: left;
   }
 
-  h1 {
+  .horse-icon {
+    font-size: 80px;
+    line-height: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,80,80,0.2));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .horse-name {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700;
-    color: var(--deep-brown);
-    letter-spacing: 0.02em;
-    line-height: 1.2;
+    font-size: 64px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
   }
 
-  .subtitle {
-    font-size: 1rem;
-    color: var(--warm-brown);
-    letter-spacing: 0.15em;
+  .horse-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 3px;
     text-transform: uppercase;
+    text-align: center;
     margin-top: 8px;
     font-weight: 300;
   }
 
-  /* Horse SVG area */
-  .horse-section {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .horse-container {
-    background: var(--soft-beige);
-    border-radius: 20px;
-    padding: 30px 40px;
-    border: 1px solid rgba(201,151,58,0.3);
-    box-shadow: 0 8px 40px rgba(74,44,23,0.08);
-    max-width: 500px;
-    width: 100%;
-    text-align: center;
-  }
-
-  .horse-container h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--warm-brown);
-    margin-bottom: 20px;
-    font-style: italic;
-    letter-spacing: 0.05em;
-  }
-
-  /* Timeline */
-  .timeline-section {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px 20px 40px;
-  }
-
-  .timeline-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--deep-brown);
-    text-align: center;
-    margin-bottom: 30px;
-    letter-spacing: 0.03em;
-  }
-
-  .day-timeline {
-    position: relative;
-    padding-left: 20px;
-  }
-
-  .day-timeline::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--gold), var(--sage), var(--gold));
-  }
-
-  .timeline-event {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    padding-left: 40px;
-    position: relative;
-    animation: fadeSlide 0.5s ease forwards;
-    opacity: 0;
-  }
-
-  .timeline-event:nth-child(1) { animation-delay: 0.1s; }
-  .timeline-event:nth-child(2) { animation-delay: 0.2s; }
-  .timeline-event:nth-child(3) { animation-delay: 0.3s; }
-  .timeline-event:nth-child(4) { animation-delay: 0.4s; }
-  .timeline-event:nth-child(5) { animation-delay: 0.5s; }
-  .timeline-event:nth-child(6) { animation-delay: 0.6s; }
-  .timeline-event:nth-child(7) { animation-delay: 0.7s; }
-
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateX(-15px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .event-dot {
-    position: absolute;
-    left: -30px;
-    top: 12px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid white;
-    box-shadow: 0 0 0 2px var(--gold);
-    flex-shrink: 0;
-  }
-
-  .event-dot.hay { background: var(--gold); }
-  .event-dot.mineral { background: var(--sage); }
-  .event-dot.huf { background: var(--warm-brown); }
-
-  .event-card {
-    background: white;
-    border-radius: 12px;
-    padding: 14px 18px;
-    flex: 1;
-    box-shadow: 0 2px 12px rgba(74,44,23,0.06);
-    border-left: 3px solid transparent;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .event-card:hover {
-    transform: translateX(4px);
-    box-shadow: 0 4px 20px rgba(74,44,23,0.12);
-  }
-
-  .event-card.hay { border-left-color: var(--gold); }
-  .event-card.mineral { border-left-color: var(--sage); }
-  .event-card.huf { border-left-color: var(--warm-brown); }
-
-  .event-time {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--warm-brown);
-    margin-bottom: 3px;
-  }
-
-  .event-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--deep-brown);
-    font-weight: 700;
-  }
-
-  .event-detail {
-    font-size: 0.9rem;
-    color: #7a6555;
-    margin-top: 2px;
-  }
-
-  .event-icon {
-    font-size: 1.4rem;
-    margin-right: 10px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .event-inner {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  /* Stats cards */
-  .stats-section {
-    max-width: 700px;
-    margin: 0 auto 50px;
-    padding: 0 20px;
-  }
-
-  .stats-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--deep-brown);
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-  }
-
-  .stat-card {
-    background: white;
-    border-radius: 16px;
-    padding: 22px 20px;
-    text-align: center;
-    box-shadow: 0 2px 16px rgba(74,44,23,0.07);
-    border-top: 3px solid var(--gold);
-    animation: fadeUp 0.6s ease forwards;
-    opacity: 0;
-  }
-
-  .stat-card:nth-child(1) { animation-delay: 0.2s; border-top-color: var(--gold); }
-  .stat-card:nth-child(2) { animation-delay: 0.35s; border-top-color: var(--sage); }
-  .stat-card:nth-child(3) { animation-delay: 0.5s; border-top-color: var(--warm-brown); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .stat-emoji { font-size: 2rem; margin-bottom: 8px; }
-
-  .stat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--deep-brown);
-    line-height: 1;
-  }
-
-  .stat-unit {
-    font-size: 0.85rem;
-    color: var(--warm-brown);
+  .header-meta {
+    font-size: 13px;
+    color: var(--sand);
+    line-height: 1.7;
+    letter-spacing: 0.5px;
     font-weight: 300;
+  }
+
+  .header-meta strong {
+    color: var(--gold);
+    font-weight: 700;
     display: block;
-    margin-top: 2px;
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
-    color: #9a8070;
-    margin-top: 6px;
-    letter-spacing: 0.05em;
+    font-size: 11px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: 500;
+    margin-bottom: 2px;
+    margin-top: 10px;
   }
 
-  /* Supplement info */
-  .supplement-section {
-    max-width: 700px;
-    margin: 0 auto 50px;
-    padding: 0 20px;
+  .header-meta strong:first-child { margin-top: 0; }
+
+  .header-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, #0E9999, #A8EDED, #0E9999);
+    opacity: 0.5;
   }
 
-  .supplement-title {
+  /* MAIN CONTENT */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px 60px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--deep-brown);
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  .supplement-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-  }
-
-  .supplement-card {
-    background: linear-gradient(135deg, #fff 0%, var(--soft-beige) 100%);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 2px 16px rgba(74,44,23,0.07);
-    border: 1px solid rgba(201,151,58,0.2);
-    animation: fadeUp 0.6s ease forwards;
-    opacity: 0;
-  }
-
-  .supplement-card:nth-child(1) { animation-delay: 0.3s; }
-  .supplement-card:nth-child(2) { animation-delay: 0.5s; }
-
-  .supp-header {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 14px;
   }
 
-  .supp-emoji { font-size: 2rem; }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--brown-light);
+    opacity: 0.4;
+  }
 
-  .supp-name {
+  /* FEEDING TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 56px;
+    top: 32px;
+    bottom: 32px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--green-mid), var(--rust));
+    opacity: 0.4;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  .time-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    position: relative;
+  }
+
+  .time-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: var(--cream);
+    z-index: 1;
+    margin-bottom: 6px;
+  }
+
+  .timeline-item:nth-child(2) .time-dot { border-color: var(--green-mid); }
+  .timeline-item:nth-child(3) .time-dot { border-color: var(--rust); }
+
+  .time-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    writing-mode: horizontal-tb;
+  }
+
+  .feed-label {
+    font-size: 10px;
+    color: var(--brown-light);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .feed-card {
+    margin: 16px 0 16px 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(59,42,26,0.07);
+    transition: box-shadow 0.2s;
+  }
+
+  .feed-card:hover {
+    box-shadow: 0 6px 24px rgba(59,42,26,0.12);
+  }
+
+  .timeline-item:nth-child(2) .feed-card { border-left-color: var(--green-mid); }
+  .timeline-item:nth-child(3) .feed-card { border-left-color: var(--rust); }
+
+  .feed-card-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    color: var(--deep-brown);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    margin-bottom: 8px;
+  }
+
+  .feed-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .feed-pill {
+    background: var(--sand);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .feed-pill .amount {
+    color: var(--rust);
+    font-size: 14px;
+  }
+
+  .feed-note {
+    font-size: 12px;
+    color: var(--brown-mid);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* SUPPLEMENTS GRID */
+  .supplements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .supplement-card {
+    background: var(--green-dark);
+    border-radius: 12px;
+    padding: 22px 22px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .supplement-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .supplement-card:nth-child(2) {
+    background: #0A7A7A;
+  }
+
+  .supplement-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .supplement-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .supplement-dose {
+    font-size: 22px;
+    font-weight: 700;
+    color: #A8F0F0;
+    margin-bottom: 4px;
+  }
+
+  .supplement-desc {
+    font-size: 12px;
+    opacity: 0.7;
+    line-height: 1.4;
+  }
+
+  .supplement-timing {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-light);
     font-weight: 700;
   }
 
-  .supp-brand {
-    font-size: 0.8rem;
-    color: var(--warm-brown);
-    letter-spacing: 0.08em;
+  .supplement-card:nth-child(2) .supplement-timing {
+    color: var(--sand);
+  }
+
+  /* CONTACTS */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .contact-card {
+    border: 1.5px solid var(--sand);
+    border-radius: 12px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 16px rgba(59,42,26,0.08);
+  }
+
+  .contact-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .contact-avatar.owner { background: var(--sand); }
+  .contact-avatar.vet { background: #D4F5F5; }
+
+  .contact-role {
+    font-size: 10px;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    color: var(--brown-light);
+    font-weight: 700;
+    margin-bottom: 3px;
   }
 
-  .supp-dose {
-    display: inline-block;
-    background: var(--gold);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 10px;
+  .contact-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    margin-bottom: 3px;
   }
 
-  .supp-freq {
-    font-size: 0.9rem;
-    color: #7a6555;
+  .contact-phone {
+    font-size: 14px;
+    color: var(--brown-mid);
+    font-weight: 400;
   }
 
-  .supp-benefit {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    color: var(--dark-sage);
-    font-style: italic;
-    padding-top: 10px;
-    border-top: 1px solid rgba(122,140,110,0.2);
+  /* DAILY SUMMARY BAR */
+  .summary-bar {
+    background: var(--brown-deep);
+    border-radius: 14px;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 16px;
   }
 
-  /* Divider */
-  .ornament {
+  .summary-stat {
     text-align: center;
+  }
+
+  .summary-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #6DDADA;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .summary-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  .summary-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* TEL LINKS */
+  a.tel-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1.5px dashed var(--brown-light);
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  a.tel-link:hover {
     color: var(--gold);
-    font-size: 1.2rem;
-    letter-spacing: 0.5em;
-    margin: 10px 0 30px;
-    opacity: 0.6;
+    border-color: var(--gold);
+  }
+  .contact-card a.tel-link {
+    border-bottom-color: var(--sand);
+  }
+  .contact-card a.tel-link:hover {
+    color: var(--rust);
+    border-color: var(--rust);
   }
 
-  footer {
+  /* FOOTER */
+  .footer {
     text-align: center;
-    padding: 20px;
-    font-size: 0.8rem;
-    color: #bba990;
-    letter-spacing: 0.1em;
-    border-top: 1px solid rgba(201,151,58,0.15);
+    padding: 16px;
+    font-size: 11px;
+    color: var(--brown-light);
+    letter-spacing: 1px;
+    border-top: 1px solid var(--sand);
+    margin-top: 16px;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <p class="subtitle">Tagesplan & Haltungsübersicht</p>
-  <h1>Thorin</h1>
-  <p style="font-family:'Crimson Pro',serif; font-size:1rem; color:var(--warm-brown); margin-top:6px; font-style:italic;">Haflinger × Huzule</p>
-</header>
-
-<!-- Horse SVG -->
-<div class="horse-section">
-  <div class="horse-container">
-    <h2>Thorin · Haflinger × Huzule</h2>
-    <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;width:100%">
-      <!-- Ground -->
-      <rect x="0" y="185" width="400" height="35" rx="4" fill="#c8b89a" opacity="0.3"/>
-      <!-- Hay pile -->
-      <ellipse cx="340" cy="182" rx="30" ry="12" fill="#d4a843" opacity="0.7"/>
-      <ellipse cx="340" cy="177" rx="22" ry="9" fill="#e8c56a" opacity="0.8"/>
-      <text x="340" y="200" text-anchor="middle" font-size="10" fill="#8b5e3c" font-family="Crimson Pro,serif">Heu</text>
-
-      <!-- Water bucket -->
-      <rect x="50" y="168" width="22" height="18" rx="3" fill="#7ab8d4" opacity="0.7"/>
-      <rect x="48" y="166" width="26" height="4" rx="2" fill="#5a9ab8" opacity="0.7"/>
-      <text x="61" y="200" text-anchor="middle" font-size="10" fill="#8b5e3c" font-family="Crimson Pro,serif">Wasser</text>
-
-      <!-- Horse body -->
-      <ellipse cx="210" cy="148" rx="72" ry="38" fill="#c07830"/>
-      <!-- Horse neck -->
-      <ellipse cx="148" cy="118" rx="28" ry="42" transform="rotate(-15,148,118)" fill="#c07830"/>
-      <!-- Horse head -->
-      <ellipse cx="118" cy="82" rx="22" ry="30" transform="rotate(-10,118,82)" fill="#c07830"/>
-      <!-- Nose -->
-      <ellipse cx="106" cy="98" rx="14" ry="10" transform="rotate(-10,106,98)" fill="#a8622a"/>
-      <!-- Nostril -->
-      <ellipse cx="103" cy="96" rx="3" ry="2" fill="#7a3a10" opacity="0.6"/>
-      <!-- Eye -->
-      <circle cx="122" cy="75" r="4" fill="#2d1a0a"/>
-      <circle cx="123" cy="74" r="1.2" fill="white"/>
-      <!-- Ear -->
-      <polygon points="132,58 128,44 142,50" fill="#c07830"/>
-      <polygon points="133,57 130,48 140,52" fill="#e8c07a" opacity="0.5"/>
-      <!-- Flaxen blaze -->
-      <ellipse cx="112" cy="85" rx="5" ry="9" transform="rotate(-10,112,85)" fill="#f0e0a0" opacity="0.7"/>
-
-      <!-- Flaxen mane (Haflinger characteristic) -->
-      <path d="M130,62 Q145,70 148,90 Q152,110 150,130" stroke="#e8d070" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.9"/>
-      <path d="M134,60 Q150,68 152,88 Q156,108 154,128" stroke="#f0e090" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
-
-      <!-- Legs -->
-      <rect x="168" y="182" width="16" height="30" rx="5" fill="#a8622a"/>
-      <rect x="192" y="182" width="16" height="32" rx="5" fill="#a8622a"/>
-      <rect x="222" y="182" width="16" height="32" rx="5" fill="#a8622a"/>
-      <rect x="248" y="182" width="16" height="30" rx="5" fill="#a8622a"/>
-      <!-- Hooves -->
-      <rect x="167" y="207" width="18" height="7" rx="3" fill="#3a2010"/>
-      <rect x="191" y="209" width="18" height="7" rx="3" fill="#3a2010"/>
-      <rect x="221" y="209" width="18" height="7" rx="3" fill="#3a2010"/>
-      <rect x="247" y="207" width="18" height="7" rx="3" fill="#3a2010"/>
-
-      <!-- Flaxen tail (Haflinger characteristic) -->
-      <path d="M278,148 Q310,138 318,158 Q322,172 308,182" stroke="#e8d070" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <path d="M278,152 Q312,145 316,165 Q318,178 305,186" stroke="#f0e090" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
-
-      <!-- Sun / window light -->
-      <circle cx="370" cy="30" r="18" fill="#f5d060" opacity="0.25"/>
-      <circle cx="370" cy="30" r="12" fill="#f5d060" opacity="0.3"/>
-    </svg>
-  </div>
-</div>
-
-<div class="ornament">— ✦ —</div>
-
-<!-- Daily Stats -->
-<div class="stats-section">
-  <h2 class="stats-title">Tägliche Übersicht</h2>
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-emoji">🌾</div>
-      <div class="stat-value">7,5</div>
-      <span class="stat-unit">kg Heu / Tag</span>
-      <div class="stat-label">3 × 2,5 kg</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-emoji">🌿</div>
-      <div class="stat-value">2</div>
-      <span class="stat-unit">Scoops Mineral</span>
-      <div class="stat-label">1 × täglich</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-emoji">🐾</div>
-      <div class="stat-value">100</div>
-      <span class="stat-unit">g Hufregulator</span>
-      <div class="stat-label">1 × täglich</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner" style="grid-template-columns: 1fr; justify-items: center; padding: 40px 48px 32px;">
+    <div>
+      <div class="horse-icon">🐴</div>
+      <div class="horse-name">Thorin</div>
+      <div class="horse-subtitle">Haflinger × Huzule</div>
     </div>
   </div>
+  <div class="header-stripe"></div>
 </div>
 
-<!-- Timeline -->
-<div class="timeline-section">
-  <h2 class="timeline-title">Tagesplan</h2>
-  <div class="day-timeline">
+<!-- MAIN -->
+<div class="main">
 
-    <div class="timeline-event">
-      <div class="event-dot hay"></div>
-      <div class="event-card hay">
-        <div class="event-inner">
-          <div class="event-icon">🌅</div>
-          <div>
-            <div class="event-time">Morgen · Fütterung 1</div>
-            <div class="event-name">Heu</div>
-            <div class="event-detail">2,5 kg · erste Mahlzeit des Tages</div>
-          </div>
+  <!-- TAGESÜBERSICHT -->
+  <div class="summary-bar" style="margin-bottom:48px">
+    <div class="summary-stat">
+      <div class="summary-value">3×</div>
+      <div class="summary-label">Fütterungen/Tag</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <div class="summary-value">7,5 kg</div>
+      <div class="summary-label">Heu gesamt</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <div class="summary-value">2</div>
+      <div class="summary-label">Supplemente</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <div class="summary-value">🧺</div>
+      <div class="summary-label">Heunetz täglich</div>
+    </div>
+  </div>
+
+  <!-- FÜTTERUNGSPLAN -->
+  <div class="section-title">Täglicher Fütterungsplan</div>
+
+  <div class="timeline">
+
+    <!-- MORGEN -->
+    <div class="timeline-item">
+      <div class="time-badge">
+        <div class="time-dot"></div>
+        <div class="time-text">Morgen</div>
+        <div class="feed-label">1. Mahlzeit</div>
+      </div>
+      <div class="feed-card">
+        <div class="feed-card-title">🌅 Morgenration</div>
+        <div class="feed-items">
+          <div class="feed-pill">🌿 Heu im Heunetz <span class="amount">2,5 kg</span></div>
         </div>
+        <div class="feed-note">Heu im Heunetz reichen – langsame Aufnahme, fördert Beschäftigung</div>
       </div>
     </div>
 
-    <div class="timeline-event">
-      <div class="event-dot hay"></div>
-      <div class="event-card hay">
-        <div class="event-inner">
-          <div class="event-icon">☀️</div>
-          <div>
-            <div class="event-time">Mittag · Fütterung 2</div>
-            <div class="event-name">Heu</div>
-            <div class="event-detail">2,5 kg · Mittagsmahlzeit</div>
-          </div>
+    <!-- MITTAG -->
+    <div class="timeline-item">
+      <div class="time-badge">
+        <div class="time-dot"></div>
+        <div class="time-text">Mittag</div>
+        <div class="feed-label">2. Mahlzeit</div>
+      </div>
+      <div class="feed-card">
+        <div class="feed-card-title">☀️ Mittagsration</div>
+        <div class="feed-items">
+          <div class="feed-pill">🌿 Heu im Heunetz <span class="amount">2,5 kg</span></div>
         </div>
+        <div class="feed-note">Gleichmäßige Versorgung über den Tag sicherstellen</div>
       </div>
     </div>
 
-    <div class="timeline-event">
-      <div class="event-dot hay"></div>
-      <div class="event-card hay">
-        <div class="event-inner">
-          <div class="event-icon">🌙</div>
-          <div>
-            <div class="event-time">Abend · Fütterung 3</div>
-            <div class="event-name">Heu</div>
-            <div class="event-detail">2,5 kg · letzte Mahlzeit des Tages</div>
-          </div>
-        </div>
+    <!-- ABEND -->
+    <div class="timeline-item">
+      <div class="time-badge">
+        <div class="time-dot"></div>
+        <div class="time-text">Abend</div>
+        <div class="feed-label">3. Mahlzeit</div>
       </div>
-    </div>
-
-    <div class="timeline-event">
-      <div class="event-dot mineral"></div>
-      <div class="event-card mineral">
-        <div class="event-inner">
-          <div class="event-icon">🌿</div>
-          <div>
-            <div class="event-time">Abend · Ergänzung</div>
-            <div class="event-name">Sanovet Mineral Basis</div>
-            <div class="event-detail">2 Scoops · täglich einmalig zum Abendfutter</div>
-          </div>
+      <div class="feed-card" style="border-left-color: var(--rust)">
+        <div class="feed-card-title">🌙 Abendration + Supplemente</div>
+        <div class="feed-items">
+          <div class="feed-pill">🌿 Heu im Heunetz <span class="amount">2,5 kg</span></div>
+          <div class="feed-pill">💊 Savovet Basis Mineral <span class="amount">2 Scoop</span></div>
+          <div class="feed-pill">🦶 Marstall Hufregulator <span class="amount">35 g</span></div>
         </div>
-      </div>
-    </div>
-
-    <div class="timeline-event">
-      <div class="event-dot huf"></div>
-      <div class="event-card huf">
-        <div class="event-inner">
-          <div class="event-icon">🐾</div>
-          <div>
-            <div class="event-time">Abend · Ergänzung</div>
-            <div class="event-name">Hufregulator Marstall</div>
-            <div class="event-detail">100 g · täglich einmalig zum Abendfutter</div>
-          </div>
-        </div>
+        <div class="feed-note">Supplemente täglich abends unter das Heu oder in eine kleine Menge Trägerfutter mischen</div>
       </div>
     </div>
 
   </div>
-</div>
 
-<div class="ornament">— ✦ —</div>
+  <!-- SUPPLEMENTE -->
+  <div class="section-title">Supplemente im Detail</div>
 
-<!-- Supplements detail -->
-<div class="supplement-section">
-  <h2 class="supplement-title">Ergänzungsfutter im Detail</h2>
-  <div class="supplement-cards">
-
+  <div class="supplements-grid">
     <div class="supplement-card">
-      <div class="supp-header">
-        <div class="supp-emoji">🌿</div>
-        <div>
-          <div class="supp-name">Mineral Basis</div>
-          <div class="supp-brand">Sanovet</div>
-        </div>
-      </div>
-      <span class="supp-dose">2 Scoops / Tag</span>
-      <div class="supp-freq">Einmal täglich · zum Abendfutter</div>
-      <div class="supp-benefit">Unterstützt die Grundversorgung mit Vitaminen, Mineralstoffen & Spurenelementen</div>
+      <span class="supplement-icon">💊</span>
+      <div class="supplement-name">Savovet Basis Mineral</div>
+      <div class="supplement-dose">2 Scoop / Tag</div>
+      <div class="supplement-desc">Mineralstoffversorgung für Knochen, Muskeln und allgemeines Wohlbefinden. Basisversorgung mit Vitaminen und Spurenelementen.</div>
+      <div class="supplement-timing">📍 Abends</div>
     </div>
 
     <div class="supplement-card">
-      <div class="supp-header">
-        <div class="supp-emoji">🐾</div>
-        <div>
-          <div class="supp-name">Hufregulator</div>
-          <div class="supp-brand">Marstall</div>
-        </div>
+      <span class="supplement-icon">🦶</span>
+      <div class="supplement-name">Marstall Hufregulator</div>
+      <div class="supplement-dose">35 g / Tag</div>
+      <div class="supplement-desc">Unterstützung der Hufhorn-Qualität und -Festigkeit. Biotin, Methionin und Zink für gesunde Huffstruktur.</div>
+      <div class="supplement-timing">📍 Abends</div>
+    </div>
+  </div>
+
+  <!-- KONTAKTE -->
+  <div class="section-title">Kontakte</div>
+
+  <div class="contacts-grid">
+    <div class="contact-card">
+      <div class="contact-avatar owner">👩</div>
+      <div>
+        <div class="contact-role">Besitzerin</div>
+        <div class="contact-name">Sandra Harrer</div>
+        <div class="contact-phone">📞 <a href="tel:+436602278547" class="tel-link">0660 / 22 78 547</a></div>
       </div>
-      <span class="supp-dose">100 g / Tag</span>
-      <div class="supp-freq">Einmal täglich · zum Abendfutter gemischt</div>
-      <div class="supp-benefit">Fördert gesundes Hufwachstum & stabile Hufqualität – reich an Biotin & Methionin</div>
     </div>
 
+    <div class="contact-card">
+      <div class="contact-avatar vet">🩺</div>
+      <div>
+        <div class="contact-role">Tierarzt</div>
+        <div class="contact-name">Daniel Maginter</div>
+        <div class="contact-phone">📞 <a href="tel:+436764236617" class="tel-link">0676 / 42 36 617</a></div>
+      </div>
+    </div>
   </div>
+
+  <!-- HINWEISE -->
+  <div class="section-title">⚠️ Wichtige Hinweise & Verbote</div>
+
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-bottom:32px">
+    <div style="background:#FFF5F5; border-radius:10px; padding:16px; border-top:3px solid #E05555; box-shadow:0 2px 8px rgba(0,80,80,0.06)">
+      <div style="font-size:22px; margin-bottom:8px">⚠️</div>
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#C03030; margin-bottom:4px">Hufrehe – Vorerkrankung</div>
+      <div style="font-size:13px; color:#5A2020">Thorin hat eine Hufrehe-Vorerkrankung. Bitte halte dich unbedingt an seinen Diätplan – danke! 🙏</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:16px; border-top:3px solid #E05555; box-shadow:0 2px 8px rgba(0,80,80,0.06)">
+      <div style="font-size:22px; margin-bottom:8px">🌿</div>
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#C03030; margin-bottom:4px">Bitte kein Gras</div>
+      <div style="font-size:13px; color:#5A2020">Thorin darf leider kein frisches Gras fressen – auch nicht kurz oder zwischendurch.</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:16px; border-top:3px solid #E05555; box-shadow:0 2px 8px rgba(0,80,80,0.06)">
+      <div style="font-size:22px; margin-bottom:8px">🍎</div>
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#C03030; margin-bottom:4px">Bitte keine Leckerlis</div>
+      <div style="font-size:13px; color:#5A2020">So gerne er Äpfel, Karotten & Co. mag – Thorin verträgt sie leider nicht. Bitte nichts zufüttern, vielen Dank! 🐴❤️</div>
+    </div>
+  </div>
+
 </div>
 
-<footer>
-  Thorin · Haflinger × Huzule · täglich 3 × Heu · 7,5 kg gesamt
-</footer>
+<div class="footer">
+  Haltungsplan · Thorin · Haflinger × Huzule · Besitzerin: Sandra Harrer
+</div>
 
 </body>
 </html>
