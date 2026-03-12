@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haltungsplan – Thorin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2FAFA;
+    --brown-deep: #1B3A3A;
+    --brown-mid: #2E7070;
+    --brown-light: #5AABAB;
+    --gold: #17BFBF;
+    --green-dark: #0E9999;
+    --green-mid: #33C4C4;
+    --green-light: #9EDDDD;
+    --rust: #0A8080;
+    --sand: #CBF0F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Lato', sans-serif;
+    color: var(--brown-deep);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0E9999 0%, #33C4C4 60%, #6DDADA 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 36px 48px 32px;
+    gap: 24px;
+  }
+
+  .header-left {
+    text-align: left;
+  }
+
+  .horse-icon {
+    font-size: 80px;
+    line-height: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,80,80,0.2));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .horse-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .horse-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  .header-meta {
+    font-size: 13px;
+    color: var(--sand);
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+  }
+
+  .header-meta strong {
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    margin-top: 10px;
+  }
+
+  .header-meta strong:first-child { margin-top: 0; }
+
+  .header-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, #0E9999, #A8EDED, #0E9999);
+    opacity: 0.5;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px 60px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--brown-light);
+    opacity: 0.4;
+  }
+
+  /* FEEDING TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 56px;
+    top: 32px;
+    bottom: 32px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--green-mid), var(--rust));
+    opacity: 0.4;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  .time-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    position: relative;
+  }
+
+  .time-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: var(--cream);
+    z-index: 1;
+    margin-bottom: 6px;
+  }
+
+  .timeline-item:nth-child(2) .time-dot { border-color: var(--green-mid); }
+  .timeline-item:nth-child(3) .time-dot { border-color: var(--rust); }
+
+  .time-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    writing-mode: horizontal-tb;
+  }
+
+  .feed-label {
+    font-size: 10px;
+    color: var(--brown-light);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .feed-card {
+    margin: 16px 0 16px 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(59,42,26,0.07);
+    transition: box-shadow 0.2s;
+  }
+
+  .feed-card:hover {
+    box-shadow: 0 6px 24px rgba(59,42,26,0.12);
+  }
+
+  .timeline-item:nth-child(2) .feed-card { border-left-color: var(--green-mid); }
+  .timeline-item:nth-child(3) .feed-card { border-left-color: var(--rust); }
+
+  .feed-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    margin-bottom: 8px;
+  }
+
+  .feed-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .feed-pill {
+    background: var(--sand);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .feed-pill .amount {
+    color: var(--rust);
+    font-size: 14px;
+  }
+
+  .feed-note {
+    font-size: 12px;
+    color: var(--brown-mid);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* SUPPLEMENTS GRID */
+  .supplements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .supplement-card {
+    background: var(--green-dark);
+    border-radius: 12px;
+    padding: 22px 22px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .supplement-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .supplement-card:nth-child(2) {
+    background: #0A7A7A;
+  }
+
+  .supplement-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .supplement-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .supplement-dose {
+    font-size: 22px;
+    font-weight: 700;
+    color: #A8F0F0;
+    margin-bottom: 4px;
+  }
+
+  .supplement-desc {
+    font-size: 12px;
+    opacity: 0.7;
+    line-height: 1.4;
+  }
+
+  .supplement-timing {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    font-weight: 700;
+  }
+
+  .supplement-card:nth-child(2) .supplement-timing {
+    color: var(--sand);
+  }
+
+  /* CONTACTS */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .contact-card {
+    border: 1.5px solid var(--sand);
+    border-radius: 12px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 16px rgba(59,42,26,0.08);
+  }
+
+  .contact-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .contact-avatar.owner { background: var(--sand); }
+  .contact-avatar.vet { background: #D4F5F5; }
+
+  .contact-role {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .contact-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    margin-bottom: 3px;
+  }
+
+  .contact-phone {
+    font-size: 14px;
+    color: var(--brown-mid);
+    font-weight: 400;
+  }
+
+  /* DAILY SUMMARY BAR */
+  .summary-bar {
+    background: var(--brown-deep);
+    border-radius: 14px;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .summary-stat {
+    text-align: center;
+  }
+
+  .summary-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #6DDADA;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .summary-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  .summary-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* TEL LINKS */
+  a.tel-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1.5px dashed var(--brown-light);
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  a.tel-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+  .contact-card a.tel-link {
+    border-bottom-color: var(--sand);
+  }
+  .contact-card a.tel-link:hover {
+    color: var(--rust);
+    border-color: var(--rust);
+  }
+
+  /* CONTACTS STRIP (under header) */
+  .contacts-strip {
+    background: white;
+    display: flex;
+    gap: 12px;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--sand);
+    flex-wrap: wrap;
+  }
+
+  .contact-strip-card {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--sand);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .contact-strip-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 3px 12px rgba(0,100,100,0.08);
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .horse-name { font-size: 44px; }
+    .horse-subtitle { font-size: 11px; letter-spacing: 2px; }
+    .header-inner { padding: 28px 20px 24px !important; }
+
+    .contacts-strip { padding: 14px 16px; gap: 10px; }
+    .contact-strip-card { padding: 12px 14px; gap: 10px; min-width: 0; }
+    .contact-avatar { width: 40px; height: 40px; font-size: 18px; }
+    .contact-name { font-size: 15px; }
+    .contact-phone { font-size: 13px; }
+
+    .main { padding: 20px 16px 48px; }
+
+    .summary-bar { padding: 16px 12px; gap: 6px; border-radius: 10px; }
+    .summary-value { font-size: 22px; }
+    .summary-label { font-size: 9px; letter-spacing: 1px; }
+    .summary-divider { display: none; }
+
+    .timeline::before { left: 44px; }
+    .timeline-item { grid-template-columns: 88px 1fr; }
+    .feed-card { padding: 14px 16px; margin: 10px 0 10px 10px; }
+    .feed-card-title { font-size: 16px; }
+    .feed-pill { font-size: 12px; padding: 4px 10px; }
+
+    .supplements-grid { grid-template-columns: 1fr; }
+    .contacts-grid { grid-template-columns: 1fr; }
+    .hints-grid { grid-template-columns: 1fr !important; }
+    .section-title { font-size: 11px; letter-spacing: 2px; }
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 11px;
+    color: var(--brown-light);
+    letter-spacing: 1px;
+    border-top: 1px solid var(--sand);
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner" style="grid-template-columns: 1fr; justify-items: center; padding: 40px 48px 32px;">
+    <div>
+      <div class="horse-icon">🐴</div>
+      <div class="horse-name">Thorin</div>
+      <div class="horse-subtitle">Haflinger × Huzule</div>
+    </div>
+  </div>
+  <div class="header-stripe"></div>
+</div>
+
+<!-- KONTAKTE UNTER HEADER -->
+<div class="contacts-strip">
+  <div class="contact-strip-card">
+    <div class="contact-avatar owner">👩</div>
+    <div>
+      <div class="contact-role">Besitzerin</div>
+      <div class="contact-name">Sandra Harrer</div>
+      <div class="contact-phone">📞 <a href="tel:+436602278547" class="tel-link">0660 / 22 78 547</a></div>
+    </div>
+  </div>
+  <div class="contact-strip-card">
+    <div class="contact-avatar vet">🩺</div>
+    <div>
+      <div class="contact-role">Tierarzt</div>
+      <div class="contact-name">Daniel Maginter</div>
+      <div class="contact-phone">📞 <a href="tel:+436764236617" class="tel-link">0676 / 42 36 617</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TAGESÜBERSICHT -->
+  <div class="summary-bar" style="margin-bottom:48px">
+    <div class="summary-stat">
+      <div class="summary-value">3×</div>
+      <div class="summary-label">Fütterungen/Tag</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <div class="summary-value">7,5 kg</div>
+      <div class="summary-label">Heu gesamt</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <div class="summary-value">2</div>
+      <div class="summary-label">Supplemente</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-stat">
+      <div class="summary-value">🧺</div>
+      <div class="summary-label">Heunetz täglich</div>
+    </div>
+  </div>
+
+  <!-- FÜTTERUNGSPLAN -->
+  <div class="section-title">Täglicher Fütterungsplan</div>
+
+  <div class="timeline">
+
+    <!-- MORGEN -->
+    <div class="timeline-item">
+      <div class="time-badge">
+        <div class="time-dot"></div>
+        <div class="time-text">Morgen</div>
+        <div class="feed-label">1. Mahlzeit</div>
+      </div>
+      <div class="feed-card">
+        <div class="feed-card-title">🌅 Morgenration</div>
+        <div class="feed-items">
+          <div class="feed-pill">🌿 Heu im Heunetz <span class="amount">2,5 kg</span></div>
+        </div>
+        <div class="feed-note">Heu im Heunetz reichen – langsame Aufnahme, fördert Beschäftigung</div>
+      </div>
+    </div>
+
+    <!-- MITTAG -->
+    <div class="timeline-item">
+      <div class="time-badge">
+        <div class="time-dot"></div>
+        <div class="time-text">Mittag</div>
+        <div class="feed-label">2. Mahlzeit</div>
+      </div>
+      <div class="feed-card">
+        <div class="feed-card-title">☀️ Mittagsration</div>
+        <div class="feed-items">
+          <div class="feed-pill">🌿 Heu im Heunetz <span class="amount">2,5 kg</span></div>
+        </div>
+        <div class="feed-note">Gleichmäßige Versorgung über den Tag sicherstellen</div>
+      </div>
+    </div>
+
+    <!-- ABEND -->
+    <div class="timeline-item">
+      <div class="time-badge">
+        <div class="time-dot"></div>
+        <div class="time-text">Abend</div>
+        <div class="feed-label">3. Mahlzeit</div>
+      </div>
+      <div class="feed-card" style="border-left-color: var(--rust)">
+        <div class="feed-card-title">🌙 Abendration + Supplemente</div>
+        <div class="feed-items">
+          <div class="feed-pill">🌿 Heu im Heunetz <span class="amount">2,5 kg</span></div>
+          <div class="feed-pill">💊 Savovet Basis Mineral <span class="amount">2 Scoop</span></div>
+          <div class="feed-pill">🦶 Marstall Hufregulator <span class="amount">35 g</span></div>
+        </div>
+        <div class="feed-note">Supplemente täglich abends unter das Heu oder in eine kleine Menge Trägerfutter mischen</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUPPLEMENTE -->
+  <div class="section-title">Supplemente im Detail</div>
+
+  <div class="supplements-grid">
+    <div class="supplement-card">
+      <span class="supplement-icon">💊</span>
+      <div class="supplement-name">Savovet Basis Mineral</div>
+      <div class="supplement-dose">2 Scoop / Tag</div>
+      <div class="supplement-desc">Mineralstoffversorgung für Knochen, Muskeln und allgemeines Wohlbefinden. Basisversorgung mit Vitaminen und Spurenelementen.</div>
+      <div class="supplement-timing">📍 Abends</div>
+    </div>
+
+    <div class="supplement-card">
+      <span class="supplement-icon">🦶</span>
+      <div class="supplement-name">Marstall Hufregulator</div>
+      <div class="supplement-dose">35 g / Tag</div>
+      <div class="supplement-desc">Unterstützung der Hufhorn-Qualität und -Festigkeit. Biotin, Methionin und Zink für gesunde Huffstruktur.</div>
+      <div class="supplement-timing">📍 Abends</div>
+    </div>
+  </div>
+
+  <!-- HINWEISE -->
+  <div class="section-title">⚠️ Wichtige Hinweise & Verbote</div>
+
+  <div class="hints-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-bottom:32px">
+    <div style="background:#FFF5F5; border-radius:10px; padding:16px; border-top:3px solid #E05555; box-shadow:0 2px 8px rgba(0,80,80,0.06)">
+      <div style="font-size:22px; margin-bottom:8px">⚠️</div>
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#C03030; margin-bottom:4px">Hufrehe – Vorerkrankung</div>
+      <div style="font-size:13px; color:#5A2020">Thorin hat eine Hufrehe-Vorerkrankung. Bitte halte dich unbedingt an seinen Diätplan – danke! 🙏</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:16px; border-top:3px solid #E05555; box-shadow:0 2px 8px rgba(0,80,80,0.06)">
+      <div style="font-size:22px; margin-bottom:8px">🌿</div>
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#C03030; margin-bottom:4px">Bitte kein Gras</div>
+      <div style="font-size:13px; color:#5A2020">Thorin darf leider kein frisches Gras fressen – auch nicht kurz oder zwischendurch.</div>
+    </div>
+    <div style="background:#FFF5F5; border-radius:10px; padding:16px; border-top:3px solid #E05555; box-shadow:0 2px 8px rgba(0,80,80,0.06)">
+      <div style="font-size:22px; margin-bottom:8px">🍎</div>
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#C03030; margin-bottom:4px">Bitte keine Leckerlis</div>
+      <div style="font-size:13px; color:#5A2020">So gerne er Äpfel, Karotten & Co. mag – Thorin verträgt sie leider nicht. Bitte nichts zufüttern, vielen Dank! 🐴❤️</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Haltungsplan · Thorin · Haflinger × Huzule · Besitzerin: Sandra Harrer
+</div>
+
+</body>
+</html>
